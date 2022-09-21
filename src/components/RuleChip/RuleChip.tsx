@@ -27,7 +27,7 @@ const RuleChip: FC<Props> = (props) => {
 
   return (
     <Box className={classes.chip} display='flex' alignItems='center' position='relative'>
-      <img src={dotSvg} alt="" width={8} />
+      <img src={rule.image ?? dotSvg} alt="" width={8} />
       <Typography variant='body1'>
         {rule.title}
       </Typography>

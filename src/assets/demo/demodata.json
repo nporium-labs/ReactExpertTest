@@ -15,6 +15,7 @@
     "ruleId": "0x03",
     "type": "union",
     "title": "union (G7 individuals)",
-    "usedBy": []
+    "usedBy": [],
+    "useLink": true
   }
 ]

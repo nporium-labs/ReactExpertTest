@@ -10,5 +10,7 @@ export interface RuleType {
   ruleId: string;
   type: string;
   title: string;
-  usedBy: string[]
+  usedBy: string[];
+  useLink?: boolean;
+  image?: string;
 }

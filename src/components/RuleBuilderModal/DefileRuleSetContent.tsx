@@ -8,6 +8,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Link from '@mui/material/Link';
 
 import RuleChip from 'components/RuleChip';
 
@@ -17,6 +18,7 @@ import infoSvg from 'assets/img/info-grey.svg';
 import unionSvg from 'assets/img/union.svg';
 import searchSvg from 'assets/img/search.svg';
 import dotSvg from 'assets/img/rec-dot.svg';
+import linkSvg from 'assets/img/link.svg';
 
 import demodata from 'assets/demo/demodata.json';
 
@@ -68,7 +70,7 @@ const DefileRuleSetContent: FC<Props> = (props) => {
             {
               selectedRules.map((cell) => (
                 <Box className={classes.chipCell} key={cell.ruleId}>
-                  <RuleChip rule={cell} handleRemove={() => handleRemoveRule(cell)} />
+                  <RuleChip rule={{...cell, image: cell.type === 'union' ? unionSvg : dotSvg}} handleRemove={() => handleRemoveRule(cell)} />
                 </Box>
               ))
             }
@@ -87,15 +89,23 @@ const DefileRuleSetContent: FC<Props> = (props) => {
                   <MenuList className={clsx('search-dropdown', classes.dropdown)}>
                     {
                       menuData.map((cell) => (
-                        <MenuItem key={cell.ruleId} onClick={(e) => {
-                          e.preventDefault();
-                          handleAddRule(cell)
-                        }}>
+                        <MenuItem key={cell.ruleId} onClick={() => handleAddRule(cell)}>
                           <Box width={18} height={18} display='flex' alignItems='center' justifyContent='center' mr={1}>
-                            <img src={dotSvg} alt="" width={10} />
+                            {
+                              cell.type === "union" ? (<img src={unionSvg} alt="" width={18} />) : (
+                                <img src={dotSvg} alt="" width={10} />
+                              )
+                            }
                           </Box>
                           {cell.title}
                           <img src={infoSvg} alt="" width={12} />
+                          {
+                            cell.useLink && (
+                              <Link href={`/rule/${cell.ruleId}`} target='_blank' sx={{ marginLeft: '9.25px' }}>
+                                <img src={linkSvg} alt="Link" width={12.5} />
+                              </Link>
+                            )
+                          }
                         </MenuItem>
                       ))
                     }
